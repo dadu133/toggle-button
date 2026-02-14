@@ -1,0 +1,44 @@
+[
+    {
+        "name":"A card1",
+        "id":1,
+        "description":"a card that describe it",
+        "image":"http://localhost:5173/images/photo.png",
+        "rating":9.3
+    },
+    {
+        "name":"A card1",
+        "id":1,
+        "description":"a card that describe it",
+        "image":"http://localhost:5173/images/photo.png",
+        "rating":9.3
+    },
+    {
+        "name":"A card1",
+        "id":2,
+        "description":"a card that describe it",
+        "image":"http://localhost:5173/images/photo.png",
+        "rating":9.3
+    },
+    {
+        "name":"A card1",
+        "id":3,
+        "description":"a card that describe it",
+        "image":"http://localhost:5173/images/photo.png",
+"rating":9.3
+    },
+    {
+        "name":"A card1",
+        "id":4,
+        "description":"a card that describe it",
+        "image":"http://localhost:5173/images/photo.png",
+        "rating":9.3
+    },
+    {
+        "name":"A card1",
+        "id":5,
+        "description":"a card that describe it",
+       "image":"http://localhost:5173/images/photo.png"  ,
+       "rating":4.3      
+    }
+]

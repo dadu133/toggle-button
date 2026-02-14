@@ -1,0 +1,30 @@
+@import "tailwindcss";
+.grid-container{
+	display: grid;
+	grid-template-columns: auto auto auto;
+	gap:10%;
+}
+*{
+	margin: 0;
+	padding: 0;
+}
+button{
+	padding: 15px;
+	color: black;
+	background-color: aqua;
+	border: 1px solid black;
+	border-radius:1rem;
+}
+.super-awesome{
+  padding: 10px;
+	color: black;
+	background-color: aqua;
+	
+}
+.average{
+ padding: 10px;
+	color:black;
+	background-color:yellow;
+	
+}
+

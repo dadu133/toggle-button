@@ -1,0 +1,23 @@
+.on{
+
+  background-color: red;
+  transform: translateX(120px);
+  transition:transform 1s;
+}
+.off{
+    transform: translateX(0px);
+
+  transition:transform 1s;
+  background-color: aliceblue;
+}
+.g-div{
+  width: 200px;
+  padding: 10px;
+  border-radius: 30px;
+
+}
+.p-div{
+  width: fit-content;
+  border-radius: 20px;
+  padding: 10px;
+}
