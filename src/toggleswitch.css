@@ -3,7 +3,14 @@
   height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  
+}
+
+.todo-input{
+  border: 2px solid black;
+  margin: 1em;
+  padding: 15px;
+  border-radius: 1rem;
 }
 /* 
 .toggle-switch {

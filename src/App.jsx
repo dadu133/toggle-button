@@ -7,28 +7,59 @@ import seriesdata from "./api/seriesData.json"
 import Seriescard from './Seriescard'
 import Cssmodule from './Cssmodule'
 import Toggleswitch from './Toggleswitch'
-
+import Todoform from './todoform'
+import Todolist from './todolist'
+import Tododatetime from './tododatetime'
 function App() {
-  const[isOn,setIson]=useState(false)
-
-function handleParentClick() {
-  setIson(!isOn);
-  console.log("grandParent clicked!");
-}
-
-function handleChildClick(e) {
-    setIson(!isOn);
-    
+  function gettodos(){
+const rawtodos=localStorage.getItem("reactodo");
+    if(!rawtodos){
+      return [];
+    }
+    return JSON.parse(rawtodos);
   }
-      
+  const [task, setTask] = useState(gettodos());
+
+   function handletodo(inputvalue) {
+         const { id, content, checked } = inputvalue;
+    //to check if the input field is empty or not
+    if (!content) return;
+    const ifTodoContentMatched = task && task.find((curTask) => curTask.content === content);
+    if (ifTodoContentMatched) return;
+
+    setTask((prevTask) => [...prevTask, { id, content, checked }]);
+  }
+  localStorage.setItem("reactodo",JSON.stringify(task));
+  function handlecheckedtodo(ttask){
+     const updatedtask=task.map((currtask)=>{
+      if(currtask.content===ttask){
+        return {...currtask,checked:!currtask.checked}
+      }
+      else{
+        return currtask;
+      }
+     })
+     setTask(updatedtask);
+  }
+  function handletododelete(value){
+    const find=task.filter((currvalue)=>currvalue.content!==value)
+    setTask(find);
+  }
   return (
     <>
-      <div className={`g-div ${isOn?" bg-green-400":" bg-gray-300"}`} onClick={handleParentClick}>
-        <div className={`p-div ${isOn?"on":"off"}`}>
-          <h1>{isOn?"ON":"OFF"}</h1>
-        </div>
+      <div className="todo-container">
+        <h1>Todo list</h1>
+        <Tododatetime></Tododatetime>
+        <Todoform onAddtodo={handletodo}></Todoform>
+        <ul className=' flex flex-col'>
+          {task && task.map((currele) => {
+            return <Todolist key={currele.id} currele={currele.content} ondeletetodo={handletododelete} checked={currele.checked} oncheckedtodo={handlecheckedtodo}></Todolist>
+          })}
+          <button onClick={()=>setTask("")}>Clear all</button>
+        </ul>
+
       </div>
-    </> 
+    </>
   )
 }
 

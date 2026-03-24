@@ -16,6 +16,12 @@
   border-radius: 30px;
 
 }
+.checked{
+  text-decoration: line-through;
+}
+.notchecked{
+  text-decoration: none;
+}
 .p-div{
   width: fit-content;
   border-radius: 20px;
