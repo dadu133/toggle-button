@@ -1,66 +1,27 @@
-import { useRef, useState } from 'react'
-import styled from './style.module.css'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import seriesdata from "./api/seriesData.json"
-import Seriescard from './Seriescard'
-import Cssmodule from './Cssmodule'
-import Toggleswitch from './Toggleswitch'
-import Todoform from './todoform'
-import Todolist from './todolist'
-import Tododatetime from './tododatetime'
-function App() {
-  function gettodos(){
-const rawtodos=localStorage.getItem("reactodo");
-    if(!rawtodos){
-      return [];
-    }
-    return JSON.parse(rawtodos);
-  }
-  const [task, setTask] = useState(gettodos());
-
-   function handletodo(inputvalue) {
-         const { id, content, checked } = inputvalue;
-    //to check if the input field is empty or not
-    if (!content) return;
-    const ifTodoContentMatched = task && task.find((curTask) => curTask.content === content);
-    if (ifTodoContentMatched) return;
-
-    setTask((prevTask) => [...prevTask, { id, content, checked }]);
-  }
-  localStorage.setItem("reactodo",JSON.stringify(task));
-  function handlecheckedtodo(ttask){
-     const updatedtask=task.map((currtask)=>{
-      if(currtask.content===ttask){
-        return {...currtask,checked:!currtask.checked}
-      }
-      else{
-        return currtask;
-      }
-     })
-     setTask(updatedtask);
-  }
-  function handletododelete(value){
-    const find=task.filter((currvalue)=>currvalue.content!==value)
-    setTask(find);
+import { useState, useRef, useEffect, use } from 'react';
+export default function App() {
+  const [pokemon, setPokemon] = useState(null);
+  useEffect(() => {
+    fetch("https://pokeapi.co/api/v2/pokemon/squirtle").then(res => res.json()).then(data => setPokemon(data)).catch(err => console.log(err))
+  },[])
+  if (!pokemon) {
+    return <div>Loading .....</div>
   }
   return (
-    <>
-      <div className="todo-container">
-        <h1>Todo list</h1>
-        <Tododatetime></Tododatetime>
-        <Todoform onAddtodo={handletodo}></Todoform>
-        <ul className=' flex flex-col'>
-          {task && task.map((currele) => {
-            return <Todolist key={currele.id} currele={currele.content} ondeletetodo={handletododelete} checked={currele.checked} oncheckedtodo={handlecheckedtodo}></Todolist>
-          })}
-          <button onClick={()=>setTask("")}>Clear all</button>
-        </ul>
-
+    <div className=' flex-col box-border h-96 w-96 p-4 border-7 border-gray-500 flex justify-center rounded-2xl' style={{padding:"10px"}}>
+      {pokemon && (
+        <div>
+          <h2 className='  text-7xl'>{pokemon.name}</h2>
+          <img src={pokemon.sprites.front_default} alt={pokemon.name} style={{ height: "200px" }} />
+        </div>
+      )}
+      <div>
+        <h3 className='text-2xl'>Abilities:</h3>
+        {pokemon.abilities.map((ability) => (
+          <p key={ability.ability.name} className='text-lg'>{ability.ability.name}</p>
+        ))}
       </div>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
